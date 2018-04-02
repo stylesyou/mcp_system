@@ -1,0 +1,14 @@
+classes:
+- service.neutron.control.single
+- system.galera.server.database.neutron
+parameters:
+  linux:
+    system:
+      package:
+        python-pymysql:
+          fromrepo: ${_param:openstack_version}
+          version: latest
+  neutron:
+    server:
+      database:
+        host: ${_param:single_address}

@@ -1,0 +1,34 @@
+parameters:
+  jenkins:
+    client:
+      job:
+        test-oss-devops-portal-nightly:
+          name: test-oss-devops-portal-nightly
+          discard:
+            build:
+              keep_num: 15
+            artifact:
+              keep_num: 15
+          type: workflow-scm
+          concurrent: true
+          scm:
+            type: git
+            url: "${_param:jenkins_gerrit_url}/oss/jenkins/pipelines"
+            credentials: "gerrit"
+            script: test-devops-portal-pipeline.groovy
+          trigger:
+            timer:
+              spec: "0 23 * * *"
+          param:
+            CREDENTIALS_ID:
+              type: string
+              default: "gerrit"
+            DEFAULT_GIT_URL:
+                type: string
+                default: "${_param:jenkins_gerrit_url}/oss/devops-portal"
+            DEFAULT_GIT_REF:
+                type: string
+                default: master
+            NIGHTLY_BUILD:
+                type: boolean
+                default: true

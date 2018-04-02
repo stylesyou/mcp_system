@@ -1,0 +1,59 @@
+#
+# Jobs to update Salt master environment (formulas and models)
+#
+parameters:
+  _param:
+    jenkins_salt_api_url: "http://${_param:salt_master_host}:6969"
+  jenkins:
+    client:
+      job:
+        deploy-update-mirror-image:
+          type: workflow-scm
+          concurrent: true
+          display_name: "Deploy - update mirror image"
+          scm:
+            type: git
+            url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"
+            branch: "${_param:jenkins_pipelines_branch}"
+            credentials: "gerrit"
+            script: update-mirror-image.groovy
+          param:
+            SALT_MASTER_URL:
+              type: string
+              default: "${_param:jenkins_salt_api_url}"
+            SALT_MASTER_CREDENTIALS:
+              type: string
+              default: "salt"
+            UPDATE_APTLY:
+              type: boolean
+              default: 'true'
+            UPDATE_APTLY_MIRRORS:
+              type: string
+              default: ""
+            PUBLISH_APTLY:
+              type: boolean
+              default: 'true'
+            RECREATE_APTLY_PUBLISHES:
+              type: boolean
+              default: 'false'
+            FORCE_OVERWRITE_APTLY_PUBLISHES:
+              type: boolean
+              default: 'false'
+            CLEANUP_APTLY:
+              type: boolean
+              default: 'false'
+            UPDATE_DOCKER_REGISTRY:
+              type: boolean
+              default: 'true'
+            CLEANUP_DOCKER_CACHE:
+              type: boolean
+              default: 'false'
+            UPDATE_PYPI:
+              type: boolean
+              default: 'true'
+            UPDATE_GIT:
+              type: boolean
+              default: 'true'
+            UPDATE_IMAGES:
+              type: boolean
+              default: 'true'

@@ -1,0 +1,23 @@
+parameters:
+  _param:
+    apt_mk_version: stable
+    mirror_mirantis_openstack_xenial_kibana_5x_source: http://apt.mirantis.com/xenial/kibana/5.x/
+    mirror_mirantis_openstack_xenial_kibana_5x_distribution: ${_param:apt_mk_version}
+    mirror_mirantis_openstack_xenial_kibana_5x_components: "kibana-5x"
+    mirror_mirantis_openstack_xenial_kibana_5x_key_url: "http://apt.mirantis.com/public.gpg"
+    mirror_mirantis_openstack_xenial_kibana_5x_gpgkeys:
+      - A76882D3
+  aptly:
+    server:
+      mirror:
+        mirantis_openstack_xenial_kibana_5x:
+          source: ${_param:mirror_mirantis_openstack_xenial_kibana_5x_source}
+          distribution: ${_param:mirror_mirantis_openstack_xenial_kibana_5x_distribution}
+          components: ${_param:mirror_mirantis_openstack_xenial_kibana_5x_components}
+          architectures: amd64
+          key_url: ${_param:mirror_mirantis_openstack_xenial_kibana_5x_key_url}
+          gpgkeys: ${_param:mirror_mirantis_openstack_xenial_kibana_5x_gpgkeys}
+          publisher:
+            component: ${_param:mirror_mirantis_openstack_xenial_kibana_5x_components}
+            distributions:
+              - ubuntu-xenial/kibana/5.x/${_param:apt_mk_version}

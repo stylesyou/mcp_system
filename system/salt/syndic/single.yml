@@ -1,0 +1,5 @@
+classes:
+- service.salt.syndic.single
+parameters:
+  _param:
+    salt_syndic_master_address: 127.0.0.1

@@ -1,0 +1,48 @@
+---
+summary: >
+  Updated the StackLight components to newer versions
+
+upgrade:
+  - |
+    Updated the following StackLight components:
+
+    - Prometheus server to version 2.0.0
+    - Alertmanager to version 0.11.0
+    - Pushgateway to version 0.4.0
+
+    .. important::
+
+       The new version of Prometheus is not backward compatible
+       with previous versions. Therefore, you must upgrade the
+       monitoring stack as described in the MCP Operations Guide.
+
+    To continue using Prometheus v1.7, add the following snippet
+    to the Reclass model of your MCP deployment. However, Mirantis
+    recommends that you update your monitoring stack to obtain new
+    features such as performance improvements.
+
+
+    .. code-block:: yaml
+
+       _param:
+         docker_image_alertmanager: docker-prod-virtual.docker.mirantis.net/openstack-docker/alertmanager:20171222124606
+         docker_image_pushgateway: docker-prod-virtual.docker.mirantis.net/openstack-docker/pushgateway:20171222124606
+         docker_image_prometheus: docker-prod-virtual.docker.mirantis.net/openstack-docker/prometheus:20171222124606
+         docker_image_remote_storage_adapter: docker-prod-virtual.docker.mirantis.net/openstack-docker/remote_storage_adapter:20171222124606
+       docker:
+         client:
+           stack:
+             monitoring:
+               service:
+                 server:
+                   environment:
+                     PROMETHEUS_STORAGE_LOCAL_ENGINE: persisted
+                     PROMETHEUS_STORAGE_LOCAL_TARGET_HEAP_SIZE: 3221225472
+                     PROMETHEUS_STORAGE_LOCAL_NUM_FINGERPRINT_MUTEXES: 4096
+
+       prometheus:
+         server:
+           version: 1.7
+
+
+    .. TODO: Add a link to the upgrade procedure.

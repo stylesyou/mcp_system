@@ -1,0 +1,11 @@
+parameters:
+  fluentd:
+    agent:
+      plugin:
+        fluent-plugin-prometheus:
+          gem: ['fluent-plugin-prometheus']
+      config:
+        input:
+          prometheus:
+            metric:
+              type: prometheus

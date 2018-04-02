@@ -1,0 +1,9 @@
+---
+summary: >
+  Updated Telegraf to version 1.5
+
+upgrades:
+  - |
+    Changed the branch for building of the Telegraf package from v1.2 to
+    v1.5. The new branch includes the upstream release 1.5 branch and all
+    downstream improvements. By default, Telegraf v1.5 is installed.

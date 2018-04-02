@@ -1,0 +1,15 @@
+---
+prelude: >
+  Default proxy configuration for Devops Portal Dasboard and Rundeck Service added
+features:
+  - |
+    In case of using OSS through proxy configurations,
+    need to define following classes for proxy nodes on cluster level 'cluster_name/stacklight/proxy.yml' or 'cluster_name/openstack/proxy.yml':
+
+     .. code-block:: yaml
+     - system.nginx.server.proxy.oss.devops_portal
+     - system.nginx.server.proxy.oss.rundeck
+
+fixes:
+  - |
+    https://mirantis.jira.com/browse/PROD-14376

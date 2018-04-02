@@ -1,0 +1,16 @@
+classes:
+- system.linux.system.sudo
+- system.openssh.server.team.members.mniedbala
+- system.openssh.server.team.members.pmichalec
+- system.openssh.server.team.members.pcizinsky
+- system.openssh.server.team.members.lmercl
+- system.openssh.server.team.members.pruzicka
+- system.openssh.server.team.members.korlowska
+- system.openssh.server.team.members.miwinski
+- system.openssh.server.team.members.mlos
+- system.openssh.server.team.members.dbogaczyk
+- system.openssh.server.team.members.dkruglov
+- system.openssh.server.team.members.sflorczak
+parameters:
+  _param:
+    linux_system_user_sudo: true
