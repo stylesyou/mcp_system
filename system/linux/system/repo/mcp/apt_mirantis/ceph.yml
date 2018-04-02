@@ -7,7 +7,7 @@ parameters:
     system:
       repo:
         mcp_ceph:
-          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/ceph/ ${_param:linux_system_repo_mcp_ceph_version} ${_param:linux_system_repo_mcp_ceph_codename}"
+          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/ ${_param:linux_system_repo_mcp_ceph_version} ceph-${_param:linux_system_repo_mcp_ceph_codename}"
           architectures: amd64
           key_url: "http://apt.mirantis.com/public.gpg"
           clean_file: true

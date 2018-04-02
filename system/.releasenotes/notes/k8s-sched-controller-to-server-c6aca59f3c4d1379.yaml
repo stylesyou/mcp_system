@@ -1,0 +1,10 @@
+---
+summary: >
+  Moved the ``k8s_scheduler`` and ``k8s_controller_manager``
+  options to ``k8s_server`` and added the ``k8s_admin``
+  option to ``k8s_server``
+
+features:
+  - Moved the ``k8s_scheduler`` and ``k8s_controller_manager``
+    options from ``k8s_client`` to ``k8s_server``. Also added
+    the ``k8s_admin`` option to ``k8s_server``.

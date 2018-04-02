@@ -5,6 +5,8 @@ classes:
 - system.haproxy.proxy.listen.openstack.neutron
 - system.galera.server.database.neutron
 parameters:
+  _param:
+    cluster_internal_protocol: 'http'
   linux:
     system:
       package:
@@ -36,3 +38,5 @@ parameters:
   neutron:
     server:
       plugin: contrail
+    identity:
+      protocol: ${_param:cluster_internal_protocol}

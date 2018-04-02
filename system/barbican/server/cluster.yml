@@ -1,3 +1,10 @@
 classes:
 - service.barbican.server.cluster
 - system.haproxy.proxy.listen.openstack.barbican
+parameters:
+  _param:
+    cluster_internal_protocol: 'http'
+  barbican:
+    server:
+      identity:
+        protocol: ${_param:cluster_internal_protocol}

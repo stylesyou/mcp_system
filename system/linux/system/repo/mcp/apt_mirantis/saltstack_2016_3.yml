@@ -6,11 +6,8 @@ parameters:
     system:
       repo:
         mcp_saltstack:
-          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/salt/2016.3/ ${_param:linux_system_repo_mcp_saltstack_version} main"
+          source: "deb [arch=amd64] http://mirror.mirantis.com/${_param:linux_system_repo_mcp_saltstack_version}/saltstack-2016.3/${_param:linux_system_codename}/ ${_param:linux_system_codename} main"
           architectures: amd64
-          key_url: "http://apt.mirantis.com/public.gpg"
+          key_id: 0E08A149DE57BFBE
+          key_server: keyserver.ubuntu.com
           clean_file: true
-          pin:
-          - pin: 'release a=${_param:linux_system_repo_mcp_saltstack_version}'
-            priority: 1100
-            package: '*'

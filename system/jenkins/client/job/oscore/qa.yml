@@ -5,6 +5,7 @@ parameters:
         oscore-build-docker-image:
           name: "{{job_prefix}}-{{oscore-qa-project}}-build-docker-image"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 25
@@ -49,6 +50,7 @@ parameters:
         oscore-docker-image-systest-template:
           name: "{{job_prefix}}-{{oscore-qa-project}}-image-systest-{{model}}"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -164,14 +166,14 @@ parameters:
                 type: string
                 default: "3"
               # test
-              TEST_TEMPEST_CONF:
+              TEST_CONF:
                 type: string
                 description: Tempest configuration file path inside container
-                default: "{{tempest_conf}}"
-              TEST_TEMPEST_TARGET:
+                default: "{{test_conf}}"
+              TEST_TARGET:
                 type: string
                 description: Node to run tests
-                default: "{{tempest_target}}"
+                default: "{{test_target}}"
               TEST_MODEL:
                 type: string
                 description: Environment salt model

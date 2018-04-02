@@ -3,6 +3,7 @@ classes:
 parameters:
   _param:
     designate_admin_api_enabled: false
+    internal_protocol: 'http'
   linux:
     system:
       package:
@@ -38,6 +39,7 @@ parameters:
         tenant: service
         user: designate
         password: ${_param:keystone_designate_password}
+        protocol: ${_param:internal_protocol}
       message_queue:
         engine: rabbitmq
         host: ${_param:cluster_vip_address}

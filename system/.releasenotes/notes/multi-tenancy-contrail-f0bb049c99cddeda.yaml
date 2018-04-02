@@ -1,0 +1,9 @@
+---
+summary: >
+  Enabled the ``multi_tenancy`` option for Mirantis
+  OpenContrail
+
+features:
+  - Enabled the ``multi_tenancy`` option for Mirantis
+    OpenContrail to prevent unauthorized sending
+    of queries to the OpenContrail API.

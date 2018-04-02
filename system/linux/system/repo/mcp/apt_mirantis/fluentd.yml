@@ -6,11 +6,8 @@ parameters:
     system:
       repo:
         mcp_fluentd:
-          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/fluentd/ ${_param:linux_system_repo_mcp_fluentd_version} main"
+          source: "deb [arch=amd64] http://mirror.mirantis.com/${_param:linux_system_repo_mcp_fluentd_version}/td-agent/${_param:linux_system_codename} ${_param:linux_system_codename} contrib"
           architectures: amd64
-          key_url: "http://apt.mirantis.com/public.gpg"
+          key_id: 901F9177AB97ACBE
+          key_server: keyserver.ubuntu.com
           clean_file: true
-          pin:
-          - pin: 'release a=${_param:linux_system_repo_mcp_fluentd_version}'
-            priority: 1100
-            package: '*'

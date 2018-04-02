@@ -35,6 +35,7 @@ parameters:
       7xDyBz85icFU0rceYQetwFH2p5tRL0GcUQhJmJFgIL0OXdCQvRNJrT3iS00N1aUo
       SG9MrLHCd5l60aCUQg0UA5ed7Hd6SA314k+HwxJno9/wJ+voBeacMg==
       -----END RSA PRIVATE KEY-----
+    cluster_internal_protocol: 'http'
   openssh:
     client:
       enabled: True
@@ -66,6 +67,7 @@ parameters:
         user: nova
         password: ${_param:keystone_nova_password}
         tenant: service
+        protocol: ${_param:cluster_internal_protocol}
       message_queue:
         engine: rabbitmq
         host: ${_param:control_address}
@@ -77,10 +79,12 @@ parameters:
         engine: glance
         host: ${_param:control_address}
         port: 9292
+        protocol: ${_param:cluster_internal_protocol}
       network:
         engine: neutron
         host: ${_param:control_address}
         port: 9696
+        protocol: ${_param:cluster_internal_protocol}
       cache:
         engine: memcached
         members:

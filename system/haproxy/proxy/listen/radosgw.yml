@@ -2,6 +2,12 @@ parameters:
   _param:
     haproxy_radosgw_bind_port: 8080
     haproxy_radosgw_source_port: 8080
+    ceph_rgw_node01_hostname: ${_param:cluster_node01_hostname}
+    ceph_rgw_node02_hostname: ${_param:cluster_node02_hostname}
+    ceph_rgw_node03_hostname: ${_param:cluster_node03_hostname}
+    ceph_rgw_node01_address: ${_param:cluster_node01_address}
+    ceph_rgw_node02_address: ${_param:cluster_node02_address}
+    ceph_rgw_node03_address: ${_param:cluster_node03_address}
   haproxy:
     proxy:
       listen:
@@ -12,15 +18,15 @@ parameters:
             - address: ${_param:cluster_vip_address}
               port: ${_param:haproxy_radosgw_bind_port}
           servers:
-            - name: ${_param:cluster_node01_hostname}
-              host: ${_param:cluster_node01_address}
+            - name: ${_param:ceph_rgw_node01_hostname}
+              host: ${_param:ceph_rgw_node01_address}
               port: ${_param:haproxy_radosgw_source_port}
               params: check
-            - name: ${_param:cluster_node02_hostname}
-              host: ${_param:cluster_node02_address}
+            - name: ${_param:ceph_rgw_node02_hostname}
+              host: ${_param:ceph_rgw_node02_address}
               port: ${_param:haproxy_radosgw_source_port}
               params: check
-            - name: ${_param:cluster_node03_hostname}
-              host: ${_param:cluster_node03_address}
+            - name: ${_param:ceph_rgw_node03_hostname}
+              host: ${_param:ceph_rgw_node03_address}
               port: ${_param:haproxy_radosgw_source_port}
               params: check

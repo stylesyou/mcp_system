@@ -6,9 +6,6 @@ parameters:
           routes:
             slack:
               receiver: HTTP-slack
-              match_re:
-                - label: route
-                  value: slack
         receiver:
           HTTP-slack:
             enabled: true

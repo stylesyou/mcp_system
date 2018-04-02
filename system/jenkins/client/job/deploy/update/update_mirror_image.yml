@@ -10,7 +10,7 @@ parameters:
         deploy-update-mirror-image:
           type: workflow-scm
           concurrent: true
-          display_name: "Deploy - update mirror image"
+          display_name: "Deploy - update local mirror"
           scm:
             type: git
             url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"
@@ -30,6 +30,9 @@ parameters:
             UPDATE_APTLY_MIRRORS:
               type: string
               default: ""
+            RECREATE_APTLY_MIRRORS:
+              type: boolean
+              default: 'true'
             PUBLISH_APTLY:
               type: boolean
               default: 'true'
@@ -42,6 +45,9 @@ parameters:
             CLEANUP_APTLY:
               type: boolean
               default: 'false'
+            UPDATE_DEBMIRRORS:
+              type: boolean
+              default: 'true'
             UPDATE_DOCKER_REGISTRY:
               type: boolean
               default: 'true'
@@ -54,6 +60,6 @@ parameters:
             UPDATE_GIT:
               type: boolean
               default: 'true'
-            UPDATE_IMAGES:
+            UPDATE_FILES:
               type: boolean
               default: 'true'

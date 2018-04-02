@@ -3,7 +3,7 @@ parameters:
     agent:
       plugin:
         fluent-plugin-prometheus:
-          gem: ['fluent-plugin-prometheus']
+          deb: ['td-agent-additional-plugins']
       config:
         input:
           prometheus:

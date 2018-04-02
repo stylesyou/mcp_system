@@ -2,6 +2,8 @@ classes:
 - service.neutron.control.single
 - system.galera.server.database.neutron
 parameters:
+  _param:
+    internal_protocol: 'http'
   linux:
     system:
       package:
@@ -12,3 +14,5 @@ parameters:
     server:
       database:
         host: ${_param:single_address}
+      identity:
+        protocol: ${_param:internal_protocol}

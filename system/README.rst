@@ -25,14 +25,14 @@ For single SR-IOV interface setup you can set parameters:
   Name of the Physical Function interface (pF)
 
 `sriov_nic01_numvfs`
-  Number of Virtual Functions (VF), for number of 
+  Number of Virtual Functions (VF), for number of
   supported VF check documentation for your network interface card.
 
 `sriov_nic01_physical_network`
   Default **physnet1**, label for physical network the interface belongs to.
 
 `sriov_unsafe_interrupts`
-  Default **False**, needs to be set **True** if your hw platform does not 
+  Default **False**, needs to be set **True** if your hw platform does not
   support interrupt remapping.
 
 
@@ -112,7 +112,7 @@ Then include datasource(s) and define corresponding parameters:
   - grafana_prometheus_port
   - grafana_prometheus_is_default (default true)
 
-Backwark compatiblity
+Backward compatiblity
 ---------------------
 
 The class **grafana.client.single** configures grafana client and an InfluxDB

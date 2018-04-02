@@ -2,6 +2,7 @@ classes:
 - system.docker
 parameters:
   _param:
+    docker_stack_aptly_public_replicas: 3
     docker_image_aptly:
       api: tcpcloud/aptly-api
       public: tcpcloud/aptly-public
@@ -25,7 +26,7 @@ parameters:
                 - /srv/volumes/aptly:/var/lib/aptly
             public:
               deploy:
-                replicas: 3
+                replicas: ${_param:docker_stack_aptly_public_replicas}
                 restart_policy:
                   condition: any
               image: ${_param:docker_image_aptly:public}

@@ -4,13 +4,15 @@ classes:
 - service.keepalived.cluster.single
 - system.haproxy.proxy.listen.openstack.cinder
 parameters:
+  _param:
+    cluster_internal_protocol: 'http'
   linux:
     system:
       package:
         python-pymysql:
           fromrepo: ${_param:openstack_version}
           version: latest
-  cinder:      
+  cinder:
     volume:
       enabled: false
       default_volume_type: ""
@@ -40,9 +42,11 @@ parameters:
         tenant: service
         user: cinder
         password: ${_param:keystone_cinder_password}
+        protocol: ${_param:cluster_internal_protocol}
       glance:
         host: ${_param:cluster_vip_address}
         port: 9292
+        protocol: ${_param:cluster_internal_protocol}
       message_queue:
         engine: rabbitmq
         members:

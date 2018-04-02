@@ -3,6 +3,7 @@ classes:
 - system.openssh.server.team.members.vsaienko
 - system.openssh.server.team.members.vnogin
 - system.openssh.server.team.members.mkarpin
+- system.openssh.server.team.members.iudovichenko
 parameters:
   _param:
     linux_system_user_sudo: true

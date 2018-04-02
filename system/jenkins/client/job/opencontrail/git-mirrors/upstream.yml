@@ -46,6 +46,8 @@ parameters:
               branches: ${_param:contrail_dpdk_extra_branches}
             - name: contrail-dpdk
               branches: ${_param:contrail_dpdk_branches}
+            - name: contrail-third-party-cache-fixup
+              branches: ${_param:contrail_third_party_cache_fixup_branches}
           template:
             discard:
               build:

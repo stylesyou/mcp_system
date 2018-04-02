@@ -18,5 +18,6 @@ parameters:
             cert_file: ${rabbitmq:server:ssl:cert_file}
             all_file: ${rabbitmq:server:ssl:all_file}
             ca_file: ${rabbitmq:server:ssl:ca_file}
-            user: rabbitmq
+            user: root
             group: rabbitmq
+            mode: 640

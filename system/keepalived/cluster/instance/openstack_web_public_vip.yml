@@ -9,6 +9,12 @@ parameters:
     keepalived_openstack_web_public_vip_interface: eth1
   keepalived:
     cluster:
+      vrrp_scripts:
+        check_pidof:
+          args: "haproxy"
+          interval: 10
+          rise: 1
+          fall: 1
       enabled: true
       instance:
         openstack_web_public_vip:
@@ -17,3 +23,4 @@ parameters:
           interface: ${_param:keepalived_openstack_web_public_vip_interface}
           virtual_router_id: 132
           priority: ${_param:keepalived_vip_priority}
+          track_script: check_pidof

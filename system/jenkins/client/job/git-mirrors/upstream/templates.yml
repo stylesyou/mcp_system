@@ -7,6 +7,10 @@ parameters:
         downstream: mk/cookiecutter-templates
         upstream: "git@github.com:Mirantis/mk2x-cookiecutter-reclass-model"
         branches: master,mcp10
+      - name: heat-fragments
+        downstream: mk/heat-fragments
+        upstream: "git@github.com:Mirantis/heat-fragments"
+        branches: master
       - name: heat-templates
         downstream: mk/heat-templates
         upstream: "git@github.com:Mirantis/mk-lab-heat-templates"

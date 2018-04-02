@@ -5,6 +5,7 @@ parameters:
         bandit-scanner-template-downstream:
           name: "{{job_prefix}}-bandit-downstream-{{project}}"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -94,6 +95,7 @@ parameters:
         bandit-scanner-template-upstream:
           name: "{{job_prefix}}-bandit-upstream-{{project}}"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30

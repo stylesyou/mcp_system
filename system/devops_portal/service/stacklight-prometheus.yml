@@ -6,7 +6,7 @@ parameters:
     config:
       service:
         stacklight-prometheus:
-          configure_proxy: false
+          configure_proxy: true
           enabled: true
           endpoint:
             address: ${_param:grafana_prometheus_address}

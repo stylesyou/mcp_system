@@ -1,8 +1,8 @@
 parameters:
   cinder:
     controller:
-      defaul_volume_type: normal-storage
-      backend: 
+      default_volume_type: normal-storage
+      backend:
         solidfire:
           engine: solidfire
           type_name: normal-storage

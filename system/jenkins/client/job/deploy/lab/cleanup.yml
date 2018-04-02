@@ -87,7 +87,7 @@ parameters:
               default: "openstack-devcloud-credentials"
             OPENSTACK_API_PROJECT:
               type: string
-              default: "mcp-mk"
+              default: "mcp-k8s, mcp-maintenance, mcp-mk, mcp-networking, mcp-opencontrail, mcp-oss, mcp-platform,  mcp-scale, mcp-stacklight, mcp-support"
             OPENSTACK_API_CLIENT:
               type: string
               default: ""

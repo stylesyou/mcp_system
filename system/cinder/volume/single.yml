@@ -1,6 +1,8 @@
 classes:
 - service.cinder.volume.single
 parameters:
+  _param:
+    cluster_internal_protocol: 'http'
   linux:
     system:
       package:
@@ -21,3 +23,4 @@ parameters:
           - host: ${_param:openstack_message_queue_node03_address}
       identity:
         host: ${_param:openstack_control_address}
+        protocol: ${_param:cluster_internal_protocol}

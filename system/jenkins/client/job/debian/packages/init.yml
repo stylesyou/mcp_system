@@ -4,6 +4,7 @@ classes:
   - system.jenkins.client.job.debian.packages.salt-multi
   - system.jenkins.client.job.debian.packages.horizon
   - system.jenkins.client.job.debian.packages.heat.resources
+  - system.jenkins.client.job.debian.packages.ceph
 parameters:
   jenkins:
     client:

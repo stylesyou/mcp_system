@@ -205,6 +205,10 @@ parameters:
               dist: xenial
               build: pipeline
               branch: debian/xenial
+            - package: python-backports.ssl-match-hostname
+              dist: xenial
+              build: pipeline
+              branch: debian/xenial
           template:
             type: workflow-scm
             concurrent: false

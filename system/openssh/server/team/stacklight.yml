@@ -109,6 +109,20 @@ parameters:
           full_name: Christian Huebner
           home: /home/crh
           email: chuebner@mirantis.com
+        mmatuszkowiak:
+          enabled: true
+          name: mmatuszkowiak
+          sudo: true
+          full_name: Mateusz Matuszkowiak
+          home: /home/mmatuszkowiak
+          email: mmatuszkowiak@mirantis.com
+        mkobus:
+          enabled: true
+          name: mkobus
+          sudo: true
+          full_name: Michal Kobus
+          home: /home/mkobus
+          email: mkobus@mirantis.com
   openssh:
     client:
       enabled: true
@@ -190,6 +204,16 @@ parameters:
           public_keys:
           - ${public_keys:crh}
           user: ${linux:system:user:crh}
+        mmatuszkowiak:
+          enabled: true
+          public_keys:
+          - ${public_keys:mmatuszkowiak}
+          user: ${linux:system:user:mmatuszkowiak}
+        mkobus:
+          enabled: true
+          public_keys:
+          - ${public_keys:mkobus}
+          user: ${linux:system:user:mkobus}
   public_keys:
     newt:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3odU+3V2uDA2ptAFL9hrJRPNEEdAyztWOZFQ5Oyd9oerTGOU3p4xmrgWWjfKFKbYGhiiIUcYAol5PkTfKukGEkkjCHYA1t023soCaaAj85wCZCnw2zQNAziwxTYmAzTqgxiSvtZNMMrtJvFHRIRDzJ3M1lV0prWNWkMM1/3FAd4W49y6VT3fkMCo8uqG7CfGdgR2DgBCxf9KaNPfW5eDEPOgmE5lK8tVSEI6T+Cg7hbcTf4lFYnlFBnlQgp/0JstsM4Vbwb4B34LOpOsf2S8rrWk2xQMjwaMHXkc2s/E8iW3F5nVFuyEXYISFQIiAHw8dzC6CHgLcyHUVWwznKawZ newt@newt-dev1
@@ -221,3 +245,7 @@ parameters:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMdgjQ/jeWwQTaPyy7G5JJAkM+QPNPFkzMldPHJzOxEBzt/M5zAooj0XgbRIDIztolhXhmj8N5QSG5n3Wn9T9e2KpoxrLaVhMV5WGTgMrXMmyT8oXLV3gLxGNHMWFvplSbHLK78EsZQQ1/kBQMyPXB1+FpIuSHVOxaospOQObJ08lvQfvlO7AUUV4ecpFj3PpV5vkKPRS+KfiRm84BeGIu51BL1BClZcOyHZPBQT+DUBjm8y4Nd7pVZRjsiBzZBvUotCbn5+RqWJnu4kyoGoRNmk8pvCx7jGL1G9rE8NNsKlCUWedvyNkDeoWKvleJuzkj3ggfuCj/iTtDoXFR95e3
     crh:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDjW4PSMoILjoZWDM8RnbiW6HXHBFntnDd6jgAlokJhTpYIjzUHpoh/OqphraKbNFnPbzL2nkIbaKZqKj+uuvbsitHnApmdFgSpOmBRGeaSExA30GqweYrIMKN5JAQTbONZWLSm+LD689CXRv2s6Th/YMELYfoi2W0pkvwiBdr+/0NxpdRvJydCn36SE6wOigu4uJXIXeNqIjTD+x4sW6GB54Ugbg+SMmI9D5ONlmfEj8K/ZmG1THdPGOLlquy/VLiuOBuwNoJCBV9shsGEmdg8NiOu8NPupQlsbmClZDbBAklJ0AF6ElAwKSiqCOhbaa7hu4qJFrCKC+XAgYxS9t7r
+    mmatuszkowiak:
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC6TGCQAH3FGNSOhSbovhwODabOAsgVqG71rEDdXvDSShwyNB3RIICefas3mdSLsG7+1K9mZ1jicWzNbotvePwzrM/MESzntzp4QZ5J/9L3BMiqWWKL2u6BQ65LGe0YMzMmdSkqMAj0uxt3+OiFDPDrwqH6qN0hwxAJM+byeUlQW8uWQYm/pmWMD60GUrnjYUfKfEa/S3symaZBHQvjtp26De8D6u/jr4TWi5VJpKqVREqU7Z4IKwn8JvHMmUbRO4endW3cRiv35Qb7s66rO6TD0KlDFnnTxOtFvLhL51j58X4MrV9FHUI6czoqjAgEDe9CW7DzZ1xMj03d6IAipgL
+    mkobus:
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCBqe3X+LrneiuieWGjlw5wRtgixBu2Q8LZjH6W+8nsOkB7iN6qRdKom3jac1Cdd5wSJ0NFAhDNcTLK4Etz/3YACglsTxk09TzXlqs1V0Y7U5a2eqn3KTOgMNsJ1aOhFq/LnmUwTdN8NXac6TIkwZZBj5KhHSvIoO+mfsascct5FIVU/+p32d3o/4NqMDDdTg/qxIMKQsh5sw5Y9Tz9h28LGbDh+QF2lW+b5YJhnCG21Uw17xcyxf3/53EpJwTXfElonSR7HMVLxrq7oDzmqKFZ2z8i9do6EgODKlZpSkxiAFOBw5oA2hPtEeqtXqvddu2FcNGuSNhx/6O8ZHIKq3Xh/tTOYnoc+qYDMRCzDwzeyivfr5Ci3n64giUaZl+KUr6D1CKeL2s8j9+kod/1JJDEeoYR+V93MTiTD/39N8eQAGv+6r9HBapXIkvr3iNuTH1+5eN36Vc90jXXRmGMZkF5P9ivNGDZGcy2pBwwPg/bRn2xb0zx1fsxd4qOi+Cd7mBCF4+SfnVCqUd2H9R0O3S7WgfLr+wOXpFq6/WwgjzI9RVhLJ5cZmePJKvYZYYhkAxsVwWSE639zFFuU1zhFXr49wa0njK9DdYWiQEhOki0ki3huABmVbWKg/zP1Rlllmtk0S4mwggJ57JYbuhEV3a1x1KOtWMzODW5cb3HlPTQw==

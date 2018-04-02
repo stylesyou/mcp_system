@@ -3,6 +3,7 @@ parameters:
     nginx_proxy_openstack_api_host: ${_param:cluster_public_host}
     nginx_proxy_openstack_api_address: 0.0.0.0
     nginx_proxy_openstack_designate_host: ${_param:designate_service_host}
+    nginx_proxy_openstack_designate_protocol: 'http'
   nginx:
     server:
       enabled: true
@@ -14,7 +15,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_designate_host}
             port: 9001
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_designate_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 9001

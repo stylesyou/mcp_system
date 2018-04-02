@@ -39,7 +39,7 @@ parameters:
           type: ovs_port
           mtu: 65000
           bridge: br-floating
-        br-mgmt:
+        br-mgm:
           enabled: true
           type: bridge
           mtu: ${_param:interface_mtu}

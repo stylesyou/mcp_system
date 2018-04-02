@@ -5,6 +5,12 @@ classes:
 parameters:
   keepalived:
     cluster:
+      vrrp_scripts:
+        vip:
+          content: "pidof haproxy && docker service ls"
+          interval: 30
+          rise: 1
+          fall: 1
       enabled: true
       instance:
         cicd_control_vip:
@@ -13,3 +19,4 @@ parameters:
           interface: ${_param:keepalived_vip_interface}
           virtual_router_id: ${_param:keepalived_vip_virtual_router_id}
           priority: ${_param:keepalived_vip_priority}
+          track_script: vip

@@ -32,3 +32,27 @@ parameters:
             NIGHTLY_BUILD:
                 type: boolean
                 default: true
+            TESTRAIL_REPORT:
+                type: boolean
+                default: false
+            TESTRAIL_URL:
+                type: string
+                default: "https://mirantis.testrail.com"
+            TESTRAIL_QA_CREDENTIALS:
+                type: string
+                default: "oscore-qa-credentials"
+            TESTRAIL_PROJECT:
+                type: string
+                default: "Mirantis Cloud Platform"
+            TESTRAIL_PLAN:
+                type: string
+                default: "[MCP] [Auto] DevOps Portal"
+            TESTRAIL_SUITE:
+                type: string
+                default: "[MCP] DevOps Portal"
+            TESTRAIL_MILESTONE:
+                type: string
+                default: "MCP-Q18.1"
+            TESTRAIL_RUN:
+                type: string
+                default: "[MCP] [Auto] DevOps Portal test run"

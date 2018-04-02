@@ -37,8 +37,118 @@ parameters:
                 default: "--force-color"
               DEFAULT_GIT_URL:
                 type: string
-                description: "Run against alternate system reclass"
+                description: "Salt model repo URL"
                 default: "${_param:jenkins_gerrit_url}/salt-models/{{name}}"
+              DEFAULT_GIT_REF:
+                type: string
+                default: master
+              CREDENTIALS_ID:
+                type: string
+                default: "gerrit"
+              PARALLEL_NODE_GROUP_SIZE:
+                type: string
+                default: "9"
+              # Salt master setup extra formulas
+              EXTRA_FORMULAS:
+                type: string
+                default: "{{extra_formulas}}"
+              FORMULAS_SOURCE:
+                type: string
+                default: "{{formulas_src}}"
+              FORMULAS_REVISION:
+                type: string
+                default: "{{formulas_revision}}"
+              SYSTEM_GIT_URL:
+                type: string
+                default: ""
+              SYSTEM_GIT_REF:
+                type: string
+                default: ""
+              CONFIG_NODE_NAME_PATTERN:
+                type: string
+                default: "{{config_node_name}}"
+              RECLASS_VERSION:
+                type: string
+                default: "master"
+              MAX_CPU_PER_JOB:
+                type: string
+                default: "2"
+              RECLASS_IGNORE_CLASS_NOTFOUND:
+                type: boolean
+                default: "{{reclass_ignore_class_notfound}}"
+              LEGACY_TEST_MODE:
+                type: boolean
+                default: "{{legacy_test_mode}}"
+              APT_REPOSITORY:
+                type: string
+                default: ""
+              APT_REPOSITORY_GPG:
+                type: string
+                default: ""
+        test_customers_salt_models:
+          name: test-customers-salt-models
+          template:
+            type: workflow-scm
+            discard:
+              build:
+                keep_num: 50
+              artifact:
+                keep_num: 50
+            scm:
+              type: git
+              url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"
+              branch: "${_param:jenkins_pipelines_branch}"
+              credentials: "gerrit"
+              script: test-customers-salt-models.groovy
+            concurrent: false
+            trigger:
+               timer:
+                 spec: "{{job_timer}}"
+            param:
+              CUSTOMERS:
+                type: string
+                description: "Comma separated list of customer model names"
+                default: "{{customers}}"
+
+        test_salt_model_customer:
+          name: test-salt-model-customer-{{name}}
+          template:
+            type: workflow-scm
+            discard:
+              build:
+                keep_num: 50
+              artifact:
+                keep_num: 50
+            scm:
+              type: git
+              url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"
+              branch: "${_param:jenkins_pipelines_branch}"
+              credentials: "gerrit"
+              script: test-salt-models-pipeline.groovy
+            concurrent: true
+            trigger:
+              gerrit:
+                project:
+                  salt-models/{{name}}:
+                    branches:
+                      - compare_type: "REG_EXP"
+                        name: "{{branch}}"
+                event:
+                  comment:
+                    - addedContains:
+                        commentAddedCommentContains: '^(?s:Patch Set \d+:.*(test|recheck|reverify)\s*)$'
+            param:
+              TEST_CLUSTER_NAMES:
+                type: string
+                description: "Comma separated list of cluster names, empty string means all valid clusters"
+                default: "{{test_cluster_names}}"
+              SALT_OPTS:
+                type: string
+                default: "--force-color"
+              DEFAULT_GIT_URL:
+                type: string
+                description: "Salt model repo URL"
+                default: "{{source}}"
               DEFAULT_GIT_REF:
                 type: string
                 default: master
@@ -73,6 +183,10 @@ parameters:
               RECLASS_IGNORE_CLASS_NOTFOUND:
                 type: boolean
                 default: "{{reclass_ignore_class_notfound}}"
+              RECLASS_VERSION:
+                type: string
+                default: "master"
+                description: "Version (branch) of Reclass we will use"
               LEGACY_TEST_MODE:
                 type: boolean
                 default: "{{legacy_test_mode}}"
@@ -166,6 +280,9 @@ parameters:
               RECLASS_MODEL_BRANCH:
                 type: string
                 default: master
+              DISTRIB_REVISION:
+                type: string
+                default: 'nightly'
               SYSTEM_GIT_URL:
                 type: string
                 default: ""
@@ -177,7 +294,7 @@ parameters:
                 default: "1"
               EXTRA_FORMULAS:
                 type: string
-                default: "aptly artifactory backupninja collectd devops-portal docker elasticsearch freeipa gerrit glusterfs grafana haproxy heka horizon influxdb jenkins keepalived kibana libvirt maas memcached mysql nginx ntp openldap openssh postfix prometheus rsync rsyslog rundeck sensu sphinx telegraf xtrabackup"
+                default: "aptly artifactory backupninja collectd devops-portal docker elasticsearch freeipa gerrit glusterfs grafana haproxy heka horizon influxdb jenkins keepalived kibana libvirt maas memcached mysql nginx ntp openldap openssh postfix prometheus rsync rsyslog rundeck sensu sphinx telegraf xtrabackup watchdog"
       job:
         test-salt-model-node:
           name: test-salt-model-node
@@ -188,6 +305,12 @@ parameters:
               keep_num: 10
           type: workflow-scm
           concurrent: true
+          plugin_properties:
+            throttleconcurrents:
+              enabled: true
+              throttle_option: category
+              categories:
+              - test-model
           scm:
             type: git
             url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"
@@ -225,6 +348,10 @@ parameters:
             SYSTEM_GIT_REF:
               type: string
               default: ""
+            RECLASS_VERSION:
+              type: string
+              default: "master"
+              description: "Version (branch) of Reclass we will use"
             MAX_CPU_PER_JOB:
               type: string
               default: "2"

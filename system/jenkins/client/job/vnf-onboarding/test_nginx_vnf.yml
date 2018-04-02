@@ -1,0 +1,82 @@
+parameters:
+  jenkins:
+    client:
+      plugin:
+        gerrit-trigger: {}
+      job:
+        test_nginx_vnf:
+          type: workflow-scm
+          name: test-nginx-vnf
+          display_name: "Onboarding tests for the NGINX VNF"
+          discard:
+            build:
+              keep_num: 20
+          scm:
+            type: git
+            url: "${_param:jenkins_gerrit_url}/vnf-onboarding/pipelines"
+            credentials: "${_param:vnf_gerrit_credentials}"
+            script: test_vnf_onboarding.groovy
+          trigger:
+            gerrit:
+              project:
+                "vnf-onboarding/nginx-vnf":
+                  branches:
+                    - compare_type: "ANT"
+                      name: "**"
+              event:
+                patchset:
+                  - created:
+                      excludeDrafts: false
+                      excludeTrivialRebase: false
+                      excludeNoCodeChange: false
+                change:
+                 - merged
+                comment:
+                  - addedContains:
+                      commentAddedCommentContains: '(retest|recheck|reverify)'
+              message:
+                build_successful: "Build successful"
+                build_unstable: "Build unstable"
+                build_failure: "Build failed"
+          param:
+            DEFAULT_GIT_URL:
+              type: string
+              default: "${_param:jenkins_gerrit_url}/vnf-onboarding/nginx-vnf"
+            DEFAULT_GIT_REF:
+              type: string
+              default: master
+            OPENSTACK_API_URL:
+              type: string
+              default: "${_param:vnf_openstack_api_url}"
+            OPENSTACK_API_CREDENTIALS:
+              type: string
+              default: "${_param:vnf_openstack_api_credentials}"
+            OPENSTACK_API_TENANT:
+              type: string
+              default: "test-nginx"
+            GERRIT_CREDENTIALS:
+              type: string
+              default: "${_param:vnf_gerrit_credentials}"
+            ELASTIC_URL:
+              type: string
+              default: "${_param:vnf_elastic_url}"
+            DEBUG_OPTIONS:
+              type: string
+              default: "skip_inspection=1"
+              description: "Example: skip_all=1 skip_deploy=1 skip_inspection=1"
+            NFV_PLATFORM_REPO:
+              type: string
+              description: "Take Cloudify blueprints, Dockerfile and CI scripts from this repo"
+              default: "${_param:jenkins_gerrit_url}/vnf-onboarding/nfv-platform"
+            NFV_PLATFORM_REPO_BRANCH:
+              type: string
+              default: "master"
+            NFV_PLATFORM_REPO_CREDENTIALS:
+              type: string
+              default: "${_param:vnf_gerrit_credentials}"
+            CI_OPTIONS:
+              type: string
+              default: "CFY_AGENT_NET=cfm-net CFY_AGENT_FLAVOR=cfy.agent CFY_AGENT_IMAGE=ubuntu1 CFY_AGENT_USER=cfyuser CFY_SG=cfm-sg CFY_SSH_KEY_ID=openstack_key"
+            VNF_OPTIONS:
+              type: string
+              default: ""

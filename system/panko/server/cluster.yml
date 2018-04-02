@@ -1,0 +1,26 @@
+classes:
+- service.panko.server.cluster
+- service.haproxy.proxy.single
+- system.apache.server.site.panko
+- system.haproxy.proxy.listen.openstack.panko
+- system.keepalived.cluster.instance.openstack_telemetry_vip
+parameters:
+  _param:
+    panko_memcached_node01_address: ${_param:cluster_node01_address}
+    panko_memcached_node02_address: ${_param:cluster_node02_address}
+    panko_memcached_node03_address: ${_param:cluster_node03_address}
+  panko:
+    server:
+      identity:
+        host: ${_param:openstack_control_address}
+      database:
+        host: ${_param:openstack_database_address}
+      cache:
+        engine: memcached
+        members:
+        - host: ${_param:panko_memcached_node01_address}
+          port: 11211
+        - host: ${_param:panko_memcached_node02_address}
+          port: 11211
+        - host: ${_param:panko_memcached_node03_address}
+          port: 11211
