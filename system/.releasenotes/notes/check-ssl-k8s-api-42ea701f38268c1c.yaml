@@ -1,0 +1,11 @@
+---
+summary: >
+  Changed the SSL check type to ``check-ssl`` in HAProxy
+  for the Kubernetes ``apiserver``
+
+features:
+  - Replaced the SSL check type from ``ssl-hello-chk`` to
+    ``check-ssl`` in HAProxy for the Kubernetes
+    ``apiserver``. This prevents the TLS errors in logs
+    occurring during the check of SSLv3 that is not supported
+    by the Kubernetes ``apiserver``.

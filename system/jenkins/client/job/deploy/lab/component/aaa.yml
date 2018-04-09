@@ -8,4 +8,4 @@ parameters:
         stack_type: heat
         stack_install: core,aaa
         stack_test: ""
-        job_timer: ""
+        job_timer: "H H(0-6) * * *"

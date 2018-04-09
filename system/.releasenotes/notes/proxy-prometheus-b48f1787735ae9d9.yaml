@@ -1,0 +1,10 @@
+---
+
+summary: >
+  Fixed the :guilabel:`Heatmaps` page in the DevOps Portal
+
+fixes:
+  - Fixed the issue with the DevOps Portal :guilabel:`Heatmaps` page
+    that was not available due to the disabled proxy for the
+    ``stacklight-prometeus`` endpoint and due to wrong
+    Prometheus URL configuration.

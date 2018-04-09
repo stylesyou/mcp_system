@@ -15,6 +15,7 @@ parameters:
         - method groovy.util.Node attributes
         - method groovy.util.XmlParser parse java.io.File
         - method groovy.util.XmlParser parseText java.lang.String
+        - method hudson.EnvVars get java.lang.String java.lang.String
         - method hudson.PluginManager getPlugins
         - method hudson.PluginWrapper getShortName
         - method hudson.model.Hudson getSlaves
@@ -58,6 +59,7 @@ parameters:
         - method java.util.List subList int int
         - method java.util.Map remove java.lang.Object
         - method java.util.Map size
+        - method java.util.Map isEmpty
         - method java.util.regex.MatchResult group int
         - method java.util.regex.MatchResult groupCount
         - method java.util.regex.Matcher find
@@ -141,3 +143,4 @@ parameters:
         - staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods toSorted java.lang.Iterable
         - staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods intersect java.util.List java.lang.Iterable
         - staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods reverse java.util.List
+        - staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getAt java.util.Collection java.lang.String

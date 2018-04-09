@@ -5,6 +5,7 @@ parameters:
         test-openstack-component-formula:
           name: "{{job_prefix}}-formula-systest-{{model}}-{{openstack_version}}"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -64,6 +65,10 @@ parameters:
                 type: string
                 default: '{{stack_reclass_branch}}'
                 description: 'Branch of repository with stack salt models'
+              STACK_CLUSTER_NAME:
+                type: string
+                default: ""
+                description: "Cluster name to use from reclass"
               # salt
               SALT_OVERRIDES:
                 type: text
@@ -99,15 +104,15 @@ parameters:
                 type: string
                 default: "3"
               # test
-              TEST_TEMPEST_CONF:
+              TEST_CONF:
                 type: string
                 description: Tempest configuration file path inside container
-                default: "{{tempest_conf}}"
-              TEST_TEMPEST_TARGET:
+                default: "{{test_conf}}"
+              TEST_TARGET:
                 type: string
                 description: Node to run tests
-                default: "{{tempest_target}}"
-              TEST_TEMPEST_PATTERN:
+                default: "{{test_target}}"
+              TEST_PATTERN:
                 type: string
                 description: Run tests matched to pattern only
                 default: "tempest"
@@ -142,6 +147,7 @@ parameters:
         test-openstack-component-periodic:
           name: "{{job_prefix}}-{{milestone}}-{{model}}-{{openstack_version}}-{{formula_pkg_revision}}"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -157,7 +163,7 @@ parameters:
               script: test-openstack-component-pipeline.groovy
             trigger:
               timer:
-               spec: "0 21 * * *"
+               spec: "H 03 * * *"
             param:
               # general
               HEAT_STACK_ZONE:
@@ -249,18 +255,18 @@ parameters:
                 type: string
                 description: Product milestone
                 default: "{{milestone}}"
-              TEST_TEMPEST_CONF:
+              TEST_CONF:
                 type: string
                 description: Tempest configuration file path inside container
-                default: "{{tempest_conf}}"
-              TEST_TEMPEST_TARGET:
+                default: "{{test_conf}}"
+              TEST_TARGET:
                 type: string
                 description: Node to run tests
-                default: "{{tempest_target}}"
-              TEST_TEMPEST_PATTERN:
+                default: "{{test_target}}"
+              TEST_PATTERN:
                 type: string
                 description: Run tests matched to pattern only
-                default: "tempest --concurrency 2"
+                default: "{{test_pattern}}"
               TEST_MODEL:
                 type: string
                 description: Environment salt model
@@ -273,9 +279,14 @@ parameters:
                 type: boolean
                 default: 'true'
                 description: Whether to fail build on test results
+              RUN_SMOKE:
+                type: boolean
+                default: "{{run_smoke}}"
+                description: Enabling of running smoke tests
         test-runner-template:
           name: "{{job_prefix}}-{{test_type}}-runner"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -308,6 +319,10 @@ parameters:
                 type: string
                 description: Job for results processing
                 default: "{{proc_results_job}}"
+              TEST_TYPE:
+                type: string
+                description: Name of test type
+                default: "{{test_type}}"
               SLAVE_NODE:
                 type: string
                 default: 'python'
@@ -323,28 +338,28 @@ parameters:
                 type: boolean
                 default: 'false'
                 description: Upload results to testrail or not
-              TEST_TEMPEST_TARGET:
+              TEST_TARGET:
                 type: string
                 description: Salt target to run tests
-              TEST_TEMPEST_IMAGE:
+              TEST_IMAGE:
                 type: string
                 description: Url to tempest docker image
-                default: 'docker-prod-local.artifactory.mirantis.com/mirantis/oscore/rally-tempest'
+                default: "{{test_image}}"
               LOCAL_TEMPEST_IMAGE:
                 type: string
                 description: Path to local docker image
                 default: ''
-              TEST_TEMPEST_PATTERN:
+              TEST_PATTERN:
                 type: string
                 description: Run tests matched to pattern only
-              TEST_TEMPEST_SET:
+              TEST_SET:
                 type: string
                 description: Run tests matched by tempest set only
-              TEST_TEMPEST_CONCURRENCY:
+              TEST_CONCURRENCY:
                 type: string
                 description: How much test threads to run
                 default: "2"
-              TEST_TEMPEST_CONF:
+              TEST_CONF:
                 type: string
                 description: Tempest configuration file path inside container
                 default: "mcp.conf"
@@ -366,6 +381,7 @@ parameters:
         results-checker-template:
           name: "{{job_prefix}}-{{test_type}}-results-checker"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -403,7 +419,7 @@ parameters:
                 type: string
                 default: "{{testrail_credentials}}"
                 description: Credentials for results upload to testrail
-              TEST_TEMPEST_TARGET:
+              TEST_TARGET:
                 type: string
                 description: Node to run tests
               TEST_MILESTONE:
@@ -412,8 +428,7 @@ parameters:
               TEST_SUITE:
                 type: string
                 description: Testrail test suite
-                default: >-
-                  'Tempest 16.0.0 with designate tests'
+                default: "{{test_suite}}"
               TEST_PLAN:
                 type: string
                 description: Testrail test plan
@@ -439,6 +454,7 @@ parameters:
         deploy-kvm-virtual-template:
           name: "{{job_prefix}}-deploy-kvm-VMs"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -520,6 +536,7 @@ parameters:
         oscore-oscc-ci-template:
           name: "{{job_prefix}}-oscc-ci"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -533,6 +550,9 @@ parameters:
               credentials: "gerrit"
               branch: 'master'
               script: oscc-ci-pipeline.groovy
+            trigger:
+              timer:
+               spec: "H 01 * * *"
             param:
               # general
               DEPLOY_JOB_NAME:
@@ -574,9 +594,14 @@ parameters:
                 type: string
                 description: "OpenStack related components list"
                 default: "{{openstack_components_list}}"
+              AUTO_PROMOTE:
+                type: boolean
+                default: "{{auto_promote}}"
+                description: Enable to autopromote repo
         build-salt-formula-refspec-template:
           name: "{{job_prefix}}-build-salt-formula-refspec"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -613,11 +638,11 @@ parameters:
                 description: Whether to make a snapshot build
               EXTRA_REPO_URL:
                 type: string
-                default: "deb ${_param:jenkins_aptly_url}/{{dist}}/ testing salt salt-latest"
+                default: "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3 xenial main; deb ${_param:jenkins_aptly_url}/{{dist}}/ testing salt"
                 description: Extra repo for building process
               EXTRA_REPO_KEY_URL:
                 type: string
-                default: "${_param:jenkins_aptly_url}/public.gpg"
+                default: "https://repo.saltstack.com/apt/ubuntu/16.04/amd64/2016.3/SALTSTACK-GPG-KEY.pub; ${_param:jenkins_aptly_url}/public.gpg"
                 description: Extra repo GPG public key URL
               OS:
                 type: string
@@ -646,6 +671,7 @@ parameters:
         test-salt-formula-refspec-template:
           name: "{{job_prefix}}-test-salt-formula-refspec"
           template:
+            description: ${_param:job_description}
             discard:
               build:
                 keep_num: 30
@@ -662,7 +688,7 @@ parameters:
             trigger:
               gerrit:
                 project:
-                  "^salt-formulas/(nova|cinder|glance|keystone|horizon|neutron|designate|heat|ironic|barbican|salt|linux|reclass|galera)$":
+                  "^salt-formulas/(nova|cinder|glance|keystone|horizon|neutron|designate|heat|ironic|barbican|aodh|ceilometer|gnocchi|panko|manila|salt|linux|reclass|galera|memcached|rabbitmq|bind|apache)$":
                     compare_type: 'REG_EXP'
                     branches:
                       - master
@@ -727,3 +753,61 @@ parameters:
                 type: string
                 default: "{{systestJobPrefix}}"
                 description: "Systest job prefix. I.e. oscore-formula-systest-virtual_mcp11_aio-"
+              OPENSTACK_COMPONENTS_LIST:
+                type: string
+                description: "OpenStack related components list"
+                default: "{{openstack_components_list}}"
+              SOURCE_REPO_NAME:
+                type: string
+                description: "Name of the repo where packages are stored"
+                default: "{{source_repo_name}}"
+        test-deploy-virtual-model-change-template:
+          name: "{{job_prefix}}-deploy-virtual-model-change-{{job_suffix}}"
+          template:
+            description: ${_param:job_description}
+            discard:
+              build:
+                keep_num: 30
+              artifact:
+                keep_num: 30
+            type: workflow-scm
+            concurrent: true
+            scm:
+              type: git
+              url: "${_param:jenkins_gerrit_url}/openstack-ci/openstack-pipelines.git"
+              credentials: "gerrit"
+              branch: 'master'
+              script: deploy-virtual-model-change-pipeline.groovy
+            trigger:
+              gerrit:
+                project:
+                  "^salt-models/mcp-virtual-aio$":
+                    compare_type: 'REG_EXP'
+                    branches:
+                      - master
+                      - stable/pike
+                      - stable/ocata
+                      - stable/newton
+                      - stable/mitaka
+                skip_vote:
+                  - successful
+                  - failed
+                  - unstable
+                  - not_built
+                event:
+                  comment:
+                    - addedContains:
+                        commentAddedCommentContains: '^(?s:Patch Set \d+:.*(test|recheck|reverify)\s*)$'
+            param:
+              CREDENTIALS_ID:
+                type: string
+                default: "{{credentials_id}}"
+              STACK_RECLASS_ADDRESS:
+                type: string
+                default: "{{stack_reclass_address}}"
+              STACK_RECLASS_BRANCH:
+                type: string
+                default: "{{stack_reclass_branch}}"
+              TEST_CLUSTER_NAMES:
+                type: string
+                default: "{{test_cluster_names}}"

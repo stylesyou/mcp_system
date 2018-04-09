@@ -7,5 +7,3 @@ parameters:
   kubernetes:
     master:
       container: false
-      network:
-        engine: calico

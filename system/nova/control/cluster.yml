@@ -11,6 +11,7 @@ parameters:
     nova_ram_allocation_ratio: 1.5
     nova_disk_allocation_ratio: 1.0
     metadata_password: metadataPass
+    cluster_internal_protocol: 'http'
   linux:
     system:
       package:
@@ -24,7 +25,7 @@ parameters:
       vncproxy_url: ${_param:nova_vncproxy_url}
       security_group: false
       dhcp_domain: novalocal
-      scheduler_default_filters: "DifferentHostFilter,RetryFilter,AvailabilityZoneFilter,RamFilter,CoreFilter,DiskFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiAffinityFilter,ServerGroupAffinityFilter,PciPassthroughFilter,NUMATopologyFilter,AggregateInstanceExtraSpecsFilter"
+      scheduler_default_filters: "DifferentHostFilter,SameHostFilter,RetryFilter,AvailabilityZoneFilter,RamFilter,CoreFilter,DiskFilter,ComputeFilter,ComputeCapabilitiesFilter,ImagePropertiesFilter,ServerGroupAntiAffinityFilter,ServerGroupAffinityFilter,PciPassthroughFilter,NUMATopologyFilter,AggregateInstanceExtraSpecsFilter"
       cpu_allocation_ratio: ${_param:nova_cpu_allocation_ratio}
       ram_allocation_ratio: ${_param:nova_ram_allocation_ratio}
       disk_allocation_ratio: ${_param:nova_disk_allocation_ratio}
@@ -50,6 +51,7 @@ parameters:
         user: nova
         password: ${_param:keystone_nova_password}
         tenant: service
+        protocol: ${_param:cluster_internal_protocol}
       message_queue:
         engine: rabbitmq
         port: 5672
@@ -63,6 +65,7 @@ parameters:
       glance:
         host: ${_param:cluster_vip_address}
         port: 9292
+        protocol: ${_param:cluster_internal_protocol}
       network:
         engine: neutron
         region: ${_param:openstack_region}
@@ -72,5 +75,6 @@ parameters:
         port: 9696
         mtu: 1500
         tenant: service
+        protocol: ${_param:cluster_internal_protocol}
       metadata:
         password: ${_param:metadata_password}

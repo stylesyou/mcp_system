@@ -6,11 +6,8 @@ parameters:
     system:
       repo:
         mcp_aptly:
-          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/aptly/ ${_param:linux_system_repo_mcp_aptly_version} main"
+          source: "deb [arch=amd64] http://mirror.mirantis.com/${_param:linux_system_repo_mcp_aptly_version}/aptly/${_param:linux_system_codename}/ squeeze main"
           architectures: amd64
-          key_url: "http://apt.mirantis.com/public.gpg"
+          key_id: 9E3E53F19C7DE460
+          key_server: keys.gnupg.net
           clean_file: true
-          pin:
-          - pin: 'release a=${_param:linux_system_repo_mcp_aptly_version}'
-            priority: 1100
-            package: '*'

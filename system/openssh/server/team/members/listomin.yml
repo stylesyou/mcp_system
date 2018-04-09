@@ -16,5 +16,5 @@ parameters:
         listomin:
           enabled: true
           public_keys:
-            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCkiHTkB53cYMFqNsKjEa1W+O3KpSRk26zCQtNsJO4KrNTSuROcpSjSGLUL55YgjBzVUUo88WNFJgu5e3oJNmXpWcfyRa2LoQyhAws6LxsGb5hH0YWB34w4uzvcHIpO5QNGmHIMaczdS721cgGMygBla32putV13gZE/y2ucFh4oza5lRuY5GZm2i1iTaDV5QqamDeYC3venjTtnXXuZbsW0Mkyn8mPXe5d3/FYSKLBGGCELnxpyopfpuCBsQEPSuYIz7EWsLCCjKgUrYZ4Uu5Sg5Ifs+Z0lSQR7/wbraDoGSyrubBHP3ub57lJvQ5kvNyKnT+BwGpoF8V+oMuoqR4l listomin@listomin-laptop
+            - key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxYzWudGTO2HNris63l1DWv3Q8gl9Rc09nrzogWy/tzXsoQohClhs3QVSSGb3ztRx1uRH7llQ3dq7Z05zxYjv5nBzU6SRkpQzSYXGx2xl0tJPWiNo1sY1xZzwlGHRJjI9DRJYmXAO6GO/n5zeYQ1kf47tSaP6MEV9HD4Ns1zWJ97Izi4EzaYQrosTSfGBfQKC6Vr4CiXfIVev1EQwUYIkrcLp5lcbOOLpfBfU9aRx1YU8V3MzYjGAiWlGeqZeKwyJc6H2JAGX8HEWDkwdMAdIjqsL5wH1KjeXd9V/gWUPaemj/XL0MLCPu0uBbdjWKGGcbTys+mr/gVGP/rwQOwYKl listomin@listomin-laptop.local
           user: ${linux:system:user:listomin}

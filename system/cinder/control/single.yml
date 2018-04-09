@@ -1,6 +1,8 @@
 classes:
 - service.cinder.control.single
 parameters:
+  _param:
+    internal_protocol: 'http'
   linux:
     system:
       package:
@@ -15,4 +17,6 @@ parameters:
       default_volume_type: ''
       database:
         host: ${_param:single_address}
+      identity:
+        protocol: ${_param:internal_protocol}
 

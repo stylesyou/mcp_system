@@ -8,7 +8,7 @@ parameters:
         stack_type: heat
         stack_install: core
         stack_test: ""
-        job_timer: ""
+        job_timer: "H H(0-6) * * *"
       - stack_name: drivetrain_ha_clusters
         stack_env: devcloud
         stack_type: heat

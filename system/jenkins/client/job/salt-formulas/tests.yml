@@ -27,6 +27,7 @@ parameters:
             - name: cinder
             - name: collectd
             - name: designate
+            - name: debmirror
             - name: dekapod
             - name: devops-portal
             - name: docker
@@ -50,6 +51,7 @@ parameters:
             - name: haproxy
             - name: heat
             - name: heka
+            - name: heketi
             - name: helm
             - name: horizon
             - name: influxdb
@@ -92,6 +94,7 @@ parameters:
             - name: openssh
             - name: openvpn
             - name: openvstorage
+            - name: oslo-templates
             - name: owncloud
             - name: panko
             - name: postfix
@@ -122,6 +125,7 @@ parameters:
             - name: tinyproxy
             - name: tftpd-hpa
             - name: varnish
+            - name: watchdog
             - name: xtrabackup
             - name: zookeeper
           template:
@@ -151,7 +155,8 @@ parameters:
             param:
               SALT_VERSION:
                 type: string
-                default: "latest"
+                default: ""
+                description: "Version of salt for use in test, empty string means latest (default)"
               SALT_OPTS:
                 type: string
                 default: "--force-color"
@@ -180,6 +185,12 @@ parameters:
               keep_num: 10
           type: workflow-scm
           concurrent: true
+          plugin_properties:
+            throttleconcurrents:
+              enabled: true
+              throttle_option: category
+              categories:
+                - test-formula
           scm:
             type: git
             url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"

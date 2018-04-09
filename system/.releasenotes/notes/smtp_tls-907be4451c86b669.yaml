@@ -1,0 +1,18 @@
+---
+summary: >
+  Additional option for push notification service to work with SMTP server
+
+features:
+  - Earlier the push notification service considered SMTP server working only under TLS.
+    In case of custom SMPT servers which use non-TLS connection the push notification service is
+    not working properly. This patch added the explicit definition of TLS using.
+    To define this parameter you need to set 'pushkin_smtp_use_tls' variable on cluster level metadata.
+
+    Example:
+    .. code-block:: yaml
+    parameters:
+      _param:
+        pushkin_smtp_use_tls: true
+
+fixes:
+  - related US: https://mirantis.jira.com/browse/PROD-14976

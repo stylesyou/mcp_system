@@ -13,7 +13,7 @@ parameters:
       secret: ${_param:ceilometer_secret_key}
       ttl: 86400
       publisher:
-        default:
+        default: {}
       bind:
         host: ${_param:cluster_local_address}
         port: 8777

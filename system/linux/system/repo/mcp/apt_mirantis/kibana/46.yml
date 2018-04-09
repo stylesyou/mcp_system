@@ -6,11 +6,8 @@ parameters:
     system:
       repo:
         mcp_kibana_46:
-          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/kibana/4.6/ ${_param:linux_system_repo_mcp_kibana_46_version} kibana-46"
+          source: "deb [arch=amd64] http://mirror.mirantis.com/${_param:linux_system_repo_mcp_kibana_46_version}/kibana-4.6/${_param:linux_system_codename}/ stable main"
           architectures: amd64
-          key_url: "http://apt.mirantis.com/public.gpg"
+          key_id: D88E42B4
+          key_server: keyserver.ubuntu.com
           clean_file: true
-          pin:
-          - pin: 'release a=${_param:linux_system_repo_mcp_kibana_46_version}'
-            priority: 1100
-            package: '*'

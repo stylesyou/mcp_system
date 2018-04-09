@@ -2,10 +2,13 @@ classes:
 - service.mongodb.server.cluster
 parameters:
   _param:
+    openstack_telemetry_node01_hostname: mdb01
+    openstack_telemetry_node02_hostname: mdb02
+    openstack_telemetry_node03_hostname: mdb03
     mongodb_server_replica_set: mongodb
-    mongodb_master: mdb01
+    mongodb_master: ${_param:openstack_telemetry_node01_hostname}
     mongodb_server_members:
-    - host: mdb01
+    - host: ${_param:openstack_telemetry_node01_hostname}
       priority: 2
-    - host: mdb02
-    - host: mdb03
+    - host: ${_param:openstack_telemetry_node02_hostname}
+    - host: ${_param:openstack_telemetry_node03_hostname}

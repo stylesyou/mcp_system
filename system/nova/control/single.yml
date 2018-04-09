@@ -1,6 +1,8 @@
 classes:
 - service.nova.control.single
 parameters:
+  _param:
+    cluster_internal_protocol: 'http'
   linux:
     system:
       package:
@@ -11,3 +13,9 @@ parameters:
     controller:
       database:
         host: ${_param:single_address}
+      identity:
+        protocol: ${_param:cluster_internal_protocol}
+      network:
+        protocol: ${_param:cluster_internal_protocol}
+      glance:
+        protocol: ${_param:cluster_internal_protocol}

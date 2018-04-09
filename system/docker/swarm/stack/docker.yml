@@ -2,6 +2,7 @@ parameters:
   _param:
     docker_image_registry: registry:2
     docker_image_visualizer: dockersamples/visualizer
+    docker_stack_registry_replicas: 3
   docker:
     client:
       stack:
@@ -11,7 +12,7 @@ parameters:
               environment:
                 REGISTRY_HTTP_SECRET: ${_param:docker_registry_http_secret}
               deploy:
-                replicas: 3
+                replicas: ${_param:docker_stack_registry_replicas}
                 restart_policy:
                   condition: any
               image: ${_param:docker_image_registry}

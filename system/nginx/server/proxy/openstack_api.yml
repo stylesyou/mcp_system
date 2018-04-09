@@ -8,6 +8,12 @@ parameters:
     nginx_proxy_openstack_glance_host: ${_param:glance_service_host}
     nginx_proxy_openstack_neutron_host: ${_param:neutron_service_host}
     nginx_proxy_openstack_heat_host: ${_param:heat_service_host}
+    nginx_proxy_openstack_keystone_protocol: 'http'
+    nginx_proxy_openstack_nova_protocol: 'http'
+    nginx_proxy_openstack_cinder_protocol: 'http'
+    nginx_proxy_openstack_glance_protocol: 'http'
+    nginx_proxy_openstack_neutron_protocol: 'http'
+    nginx_proxy_openstack_heat_protocol: 'http'
   nginx:
     server:
       enabled: true
@@ -20,7 +26,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_keystone_host}
             port: 5000
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_keystone_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 5000
@@ -34,7 +40,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_keystone_host}
             port: 35357
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_keystone_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 35357
@@ -48,7 +54,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_nova_host}
             port: 8774
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_nova_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 8774
@@ -62,7 +68,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_cinder_host}
             port: 8776
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_cinder_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 8776
@@ -77,7 +83,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_glance_host}
             port: 9292
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_glance_protocol}
             size: 30000m
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
@@ -92,7 +98,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_neutron_host}
             port: 9696
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_neutron_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 9696
@@ -105,7 +111,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_heat_host}
             port: 8003
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_heat_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 8003
@@ -118,7 +124,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_heat_host}
             port: 8000
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_heat_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 8000
@@ -132,7 +138,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_heat_host}
             port: 8004
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_heat_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 8004
@@ -146,7 +152,7 @@ parameters:
           proxy:
             host: ${_param:nginx_proxy_openstack_nova_host}
             port: 8773
-            protocol: http
+            protocol: ${_param:nginx_proxy_openstack_nova_protocol}
           host:
             name: ${_param:nginx_proxy_openstack_api_host}
             port: 8773

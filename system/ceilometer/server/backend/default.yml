@@ -1,0 +1,12 @@
+classes:
+- service.ceilometer.server.publisher.gnocchi
+- service.ceilometer.server.publisher.panko
+parameters:
+  # gnocchi and panko are default backends for Ceilometer since Pike
+  # they are incompatible with any legacy database publisher backends
+  ceilometer:
+    server:
+      database: ~
+      publisher:
+        default:
+          enabled: false

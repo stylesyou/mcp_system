@@ -6,11 +6,8 @@ parameters:
     system:
       repo:
         mcp_docker:
-          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/docker/ ${_param:linux_system_repo_mcp_docker_version} stable"
+          source: "deb [arch=amd64] http://mirror.mirantis.com/${_param:linux_system_repo_mcp_docker_version}/docker/${_param:linux_system_codename}/ ${_param:linux_system_codename} stable"
           architectures: amd64
-          key_url: "http://apt.mirantis.com/public.gpg"
+          key_id: 8D81803C0EBFCD88
+          key_server: keyserver.ubuntu.com
           clean_file: true
-          pin:
-          - pin: 'release a=${_param:linux_system_repo_mcp_docker_version}'
-            priority: 1100
-            package: '*'

@@ -12,6 +12,9 @@ parameters:
     neutron_tenant_network_types: "flat,vxlan"
     neutron_enable_qos: False
     neutron_enable_vlan_aware_vms: False
+    neutron_enable_bgp_vpn: False
+    neutron_bgp_vpn_driver: bagpipe
+    cluster_internal_protocol: 'http'
   neutron:
     server:
       global_physnet_mtu: ${_param:neutron_global_physnet_mtu}
@@ -19,6 +22,9 @@ parameters:
       dvr: ${_param:neutron_control_dvr}
       qos: ${_param:neutron_enable_qos}
       vlan_aware_vms: ${_param:neutron_enable_vlan_aware_vms}
+      bgp_vpn:
+        enabled: ${_param:neutron_enable_bgp_vpn}
+        driver: ${_param:neutron_bgp_vpn_driver}
       backend:
         engine: ml2
         tenant_network_types: "${_param:neutron_tenant_network_types}"
@@ -32,6 +38,7 @@ parameters:
         host: ${_param:openstack_database_address}
       identity:
         region: ${_param:openstack_region}
+        protocol: ${_param:cluster_internal_protocol}
       message_queue:
         members:
           - host: ${_param:openstack_message_queue_node01_address}

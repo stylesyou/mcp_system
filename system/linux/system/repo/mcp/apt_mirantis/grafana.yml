@@ -6,11 +6,8 @@ parameters:
     system:
       repo:
         mcp_grafana:
-          source: "deb [arch=amd64] http://apt.mirantis.com/${_param:linux_system_codename}/grafana/ ${_param:linux_system_repo_mcp_grafana_version} main"
+          source: "deb [arch=amd64] http://mirror.mirantis.com/${_param:linux_system_repo_mcp_grafana_version}/grafana/${_param:linux_system_codename}/ jessie main"
           architectures: amd64
-          key_url: "http://apt.mirantis.com/public.gpg"
+          key_id: C2E73424D59097AB
+          key_server: keyserver.ubuntu.com
           clean_file: true
-          pin:
-          - pin: 'release a=${_param:linux_system_repo_mcp_grafana_version}'
-            priority: 1100
-            package: '*'

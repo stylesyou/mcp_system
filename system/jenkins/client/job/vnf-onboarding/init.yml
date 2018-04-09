@@ -1,0 +1,11 @@
+classes:
+  - system.jenkins.client.job.vnf-onboarding.test_avi_loadbalancer
+  - system.jenkins.client.job.vnf-onboarding.test_nginx_vnf
+
+parameters:
+  _param:
+    cluster_public_protocol: https
+    vnf_gerrit_credentials: "gerrit"
+    vnf_openstack_api_url: "${_param:cluster_public_protocol}://${_param:cluster_public_host}:5000/v2.0"
+    vnf_openstack_api_credentials: "test-openstack"
+    vnf_elastic_url: "${_param:stacklight_log_address}:${_param:cluster_elasticsearch_port}"

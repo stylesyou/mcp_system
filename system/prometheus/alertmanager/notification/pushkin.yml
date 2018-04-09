@@ -10,9 +10,7 @@ parameters:
           routes:
             pushkin:
               receiver: HTTP-pushkin
-              match_re:
-                - label: route
-                  value:  .+?
+              continue: true
         receiver:
           HTTP-pushkin:
             enabled: true

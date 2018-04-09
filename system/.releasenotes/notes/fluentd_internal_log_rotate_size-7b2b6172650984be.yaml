@@ -1,0 +1,39 @@
+---
+# Author the following sections or remove the section if it is not related.
+# Use one release note per a feature.
+#
+# If you miss a section from the list below, please first submit a review
+# adding it to .releasenotes/config.yaml.
+#
+# Format content with reStructuredText (RST).
+# **Formatting examples:**
+# - |
+#   This is a brief description of the feature. It may include a
+#   number of components:
+#
+#   * List item 1
+#   * List item 2.
+#     This code block below will appear as part of the list item 2:
+#
+#     .. code-block:: yaml
+#
+#        classes:
+#        - system.class.to.load
+#
+#   The code block below will appear on the same level as the feature
+#   description:
+#
+#   .. code-block:: text
+#
+#      provide model/formula pillar snippets
+
+
+summary: >
+   Added the ``td_agent_log_rotate_size`` parameter to Fluentd
+
+features:
+  - |
+    Added the capability to specify the log rotation size for Fluentd
+    ``td-agent`` using the ``td_agent_log_rotate_size`` parameter. This prevents a
+    single log file from taking too much disk space. This parameter is set to
+    10 MB by default.

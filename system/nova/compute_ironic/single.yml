@@ -1,6 +1,8 @@
 classes:
 - service.nova.compute.ironic
 parameters:
+  _param:
+    cluster_internal_protocol: 'http'
   nova:
     compute:
       version: ${_param:nova_version}
@@ -23,6 +25,7 @@ parameters:
         user: nova
         password: ${_param:keystone_nova_password}
         tenant: service
+        protocol: ${_param:cluster_internal_protocol}
       message_queue:
         engine: rabbitmq
         port: 5672
@@ -38,6 +41,9 @@ parameters:
         user: neutron
         tenant: service
         password: ${_param:keystone_neutron_password}
+        protocol: ${_param:cluster_internal_protocol}
+      glance:
+        protocol: ${_param:cluster_internal_protocol}
       ironic:
         region: ${_param:openstack_region}
         host: ${_param:control_address}
@@ -45,3 +51,4 @@ parameters:
         user: ironic
         tenant: service
         password: ${_param:keystone_ironic_password}
+        protocol: ${_param:cluster_internal_protocol}

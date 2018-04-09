@@ -1,0 +1,93 @@
+parameters:
+  _param:
+    apt_mk_version: 'stable'
+    mirror_mirantis_com_ubuntu_xenial_force: False
+  debmirror:
+    client:
+      enabled: true
+      mirrors:
+        mirror_mirantis_com_ubuntu_xenial:
+          force: ${_param:mirror_mirantis_com_ubuntu_xenial_force}
+          lock_target: True
+          extra_flags: [ '--verbose', '--progress', '--nosource', '--no-check-gpg', '--rsync-extra=none' ]
+          method: "rsync"
+          arch: [ 'amd64' ]
+          mirror_host: "mirror.mirantis.com"
+          mirror_root: ":mirror/${_param:apt_mk_version}/ubuntu/"
+          target_dir: "/srv/volumes/aptly/public/ubuntu/"
+          log_file: "/var/log/debmirror/mirror_mirantis_com_ubuntu_xenial.log"
+          dist: [ xenial , xenial-security, xenial-updates ]
+          section: [ main , multiverse, restricted, universe ]
+          # Don't exclude main/x11 - its required for many pkgs.
+          exclude_deb_section: [games, gnome, Xfce, sound, electronics, graphics, hamradio,
+            doc, localization, kde, video, translations, news, multiverse/games, multiverse/gnome,
+            multiverse/Xfce, multiverse/sound, multiverse/electronics, multiverse/graphics,
+            multiverse/hamradio, multiverse/doc, multiverse/localization, multiverse/kde, multiverse/video,
+            multiverse/translations, multiverse/news, multiverse/x11, universe/games, universe/gnome,
+            universe/Xfce, universe/sound, universe/electronics, universe/hamradio, universe/doc,
+            universe/localization, universe/kde, universe/video, universe/translations, universe/news,
+            universe/x11, universe/graphics, restricted/games, restricted/gnome, restricted/Xfce,
+            restricted/sound, restricted/electronics, restricted/graphics, restricted/hamradio,
+            restricted/doc, restricted/localization, restricted/kde, restricted/video, restricted/translations,
+            restricted/news, restricted/x11]
+          filter:
+            1: "--exclude='android*'"
+            2: "--exclude='/firefox*'"
+            3: "--exclude='/chromium-browser*'"
+            4: "--exclude='/ceph*'"
+            5: "--exclude='/*-wallpapers*'"
+            6: "--exclude='/language-pack-(?!en)'"
+            7: "--exclude='thunderbird*'"
+            8: "--exclude='libreoffice*'"
+            9: "--exclude='openoffice*'"
+            10: "--exclude='live-image-*-desktop*'"
+            11: "--exclude='lubuntu-*'"
+            12: "--exclude='kubuntu-*'"
+            13: "--exclude='cinnamon-*'"
+            14: "--exclude='mate-*'"
+            15: "--exclude='desktop-*'"
+            16: "--exclude='flashplugin*'"
+            17: "--exclude='gnome*'"
+            18: "--exclude='/unity*'"
+            20: "--exclude='openjdk-*-(dbg|demo|source).*'"
+            22: "--exclude='(kde|ubuntu|xfce4|sabily).*artwork*'"
+            23: "--exclude='ubuntu-touch*'"
+            24: "--exclude='remmina*'"
+            25: "--exclude='/libbluetooth*'"
+            26: "--exclude='/libandroid*'"
+            27: "--exclude='/banshee*'"
+            27: "--exclude='/*(.xorg)*joystick'"
+            28: "--exclude='/xserver-xorg-video(.*vivid|.*wily|.*utopic)'"
+            30: "--exclude='/*universe.*bluez.*'"
+            31: "--exclude='/main/m/maas/'" # ppa should be always used
+            32: "--exclude='/main/a/a11y-profile-manager/'"
+            33: "--exclude='/universe/.*(alsa|ubuntuone|telepathy|debian-multimedia|kodi|mediaplayer|nagios|getfem|gammaray|geotranz)'"
+            34: "--exclude='/universe/.*(pyqt|usb-creator|gcc-mingw-w64|gcc-snapshot)'"
+            35: "--exclude='/universe/q/qt'"
+            36: "--exclude='/universe/g/glusterfs/'" # ppa should be always used
+            37: "--exclude='/universe/d/docker.io/'" # ppa should be always used
+            38: "--exclude='/universe/a/aptly'" # ppa should be always used
+            39: "--exclude='/universe/e/elasticsearch'" # ppa should be always used
+            40: "--exclude='/universe/g/grafana/'" # ppa should be always used
+            41: "--exclude='/universe/i/influxdb(?!.*python)'" # ppa should be always used
+            42: "--exclude='/universe/s/salt'" # ppa should be always used
+            43: "--exclude='/universe/z/zabbix'" # ppa should be always used
+            44: "--exclude='/universe/.*(brasero|mediascanner2|mediatomb|mediawiki|qtmultimedia|pidgin|skype|eclipse|esys-particle|fusion)'"
+            89: "--exclude='/universe/k/(kde)'"
+            90: "--exclude='/universe/p/(psi-plus|puppet-module|plasma|pcl/)'"
+            91: "--exclude='golang-github-*'"
+            92: "--exclude='/(llvm-toolchain|address-book|amule|openclipart|rhythmbox|gimp|sonic-visualiser|games|bsdgame|gazebo|arduino|webkitgtk|widelands|wxwidget|warzone|wings3d).*'"
+            93: "--exclude='/(asterisk|abiword|webbrowser-app|imagemagick|.*clamav|wireshar|vlc|.*transmission|tryton-modules|trilinos|tomboy|wine1|wine-dev|compiz|mythtv|ubuntustudio).*'"
+            94: "--exclude='/(ceilometer|nova|openstack-debian-images).*'"
+            95: "--exclude='/gcc-.*-cross.*'"
+            96: "--exclude='/(nvidia).*'"
+            97: "--exclude='linux-*-(.*azure|.*aws|gke|.*azure-edge|.*linux-oem)'"
+            98: "--exclude='/.*(arm64|powerpc|s390x|armel|armhf|sparc64|mips64|ppc64el|mipsn32)(?!.*amd64)'"
+            99: "--exclude='/*universe.*(-armel-|-arm-)(?!.*amd64)'"
+            # List of extra includes, founded after tests.
+            100: "--include='/main(.*)manpages'"
+            101: "--include='/main(.*)python-(.*)doc'"
+            102: "--include='/main(.*)python-(.*)network'"
+            103: "--include='/main(.*)unittest2'" # openstack* pkgs
+            104: "--include='/main(.*)libbluetooth3'" # python-guestfs
+

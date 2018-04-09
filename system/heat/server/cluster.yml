@@ -5,7 +5,8 @@ classes:
 - system.haproxy.proxy.listen.openstack.heat
 parameters:
   _param:
-    cluster_public_protocol: https
+    cluster_public_protocol: 'https'
+    cluster_internal_protocol: 'http'
   linux:
     system:
       package:
@@ -54,6 +55,7 @@ parameters:
         tenant: service
         user: heat
         password: ${_param:keystone_heat_password}
+        protocol: ${_param:cluster_internal_protocol}
       message_queue:
         engine: rabbitmq
         port: 5672

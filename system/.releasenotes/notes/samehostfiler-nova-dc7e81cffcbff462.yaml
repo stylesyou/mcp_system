@@ -1,0 +1,8 @@
+---
+summary: >
+  Added ``SameHostFilter`` to the default Nova filters
+
+features:
+  - Added ``SameHostFilter`` to the default Nova filters
+    to allow users scheduling instances that are based
+    on the ``same_host`` hint.

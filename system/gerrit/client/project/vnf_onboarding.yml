@@ -1,0 +1,44 @@
+parameters:
+  gerrit:
+    client:
+      project:
+        vnf-onboarding/avi-loadbalancer:
+          enabled: true
+          description: AVI VNF
+          upstream: https://gerrit.mcp.mirantis.net/vnf-onboarding/avi-loadbalancer
+          access: ${gerrit:client:default_access}
+          require_change_id: true
+          require_agreement: false
+          merge_content: true
+        vnf-onboarding/metaswitch-vsbc:
+          enabled: true
+          description: Metaswitch vSBC VNF
+          upstream: https://gerrit.mcp.mirantis.net/vnf-onboarding/metaswitch-vsbc
+          access: ${gerrit:client:default_access}
+          require_change_id: true
+          require_agreement: false
+          merge_content: true
+        vnf-onboarding/nfv-platform:
+          enabled: true
+          description: Onboarding platform blueprints and tools
+          upstream: https://gerrit.mcp.mirantis.net/vnf-onboarding/nfv-platform
+          access: ${gerrit:client:default_access}
+          require_change_id: true
+          require_agreement: false
+          merge_content: true
+        vnf-onboarding/nginx-vnf:
+          enabled: true
+          description: NGINX VNF
+          upstream: https://gerrit.mcp.mirantis.net/vnf-onboarding/nginx-vnf
+          access: ${gerrit:client:default_access}
+          require_change_id: true
+          require_agreement: false
+          merge_content: true
+        vnf-onboarding/pipelines:
+          enabled: true
+          description: VNF onboarding pipelines
+          upstream: https://gerrit.mcp.mirantis.net/vnf-onboarding/pipelines
+          access: ${gerrit:client:default_access}
+          require_change_id: true
+          require_agreement: false
+          merge_content: true

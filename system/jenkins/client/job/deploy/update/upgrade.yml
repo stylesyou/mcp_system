@@ -36,6 +36,10 @@ parameters:
               type: boolean
               default: 'true'
               description: "Rollback if control upgrade fails"
+            OPERATING_SYSTEM_RELEASE_UPGRADE:
+              type: boolean
+              default: 'false'
+              description: "Set to true if operating system release upgrade is desired. For ex. from Ubuntu 14.04 currently running on ctl and prx nodes to Ubuntu 16.04"
             SKIP_VM_RELAUNCH:
               type: boolean
               default: 'false'

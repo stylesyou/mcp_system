@@ -13,6 +13,7 @@ parameters:
     master:
       accept_policy: auto_accept
       worker_threads: 40
+      max_open_files: 15000
       command_timeout: 10
       peer:
         '.*':

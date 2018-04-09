@@ -187,6 +187,69 @@ parameters:
               type: string
               default: ""
               description: Proxy address to clone repo and install python requirements
+        cvp-func:
+          type: workflow-scm
+          name: cvp-func
+          display_name: "CVP - Functional tests"
+          discard:
+            build:
+              keep_num: 20
+            artifact:
+              keep_num: 20
+          concurrent: false
+          scm:
+            type: git
+            url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"
+            credentials: "gerrit"
+            script: cvp-func.groovy
+          param:
+            DEBUG_MODE:
+              type: boolean
+              default: 'false'
+              description: Enable if you need to keep container after the test and debug
+            SKIP_LIST_PATH:
+              type: string
+              default: "cvp-configuration/tempest/skip-list.yaml"
+              description: Path to skip list in container
+            SALT_MASTER_URL:
+              type: string
+              default: "${_param:jenkins_salt_api_url}"
+              description: Full Salt API address [e.g. https://10.10.10.2:6969]
+            SALT_MASTER_CREDENTIALS:
+              type: string
+              default: "salt"
+              description: Credentials to the Salt API
+            TEST_IMAGE:
+              type: string
+              default: "xrally/xrally-openstack:0.9.1"
+              description: Docker image to use for running Rally/Tempest
+            TARGET_NODE:
+              type: string
+              default: "${_param:cicd_control_node03_hostname}.${_param:cluster_domain}"
+              description: Node where container with Tempest will be run
+            PROXY:
+              type: string
+              default: ""
+              description: Proxy address to clone repo and install python requirements
+            TEMPEST_TEST_PATTERN:
+              type: string
+              default: "set=smoke"
+              description: Use set=smoke (or identity,full...) or just test name
+            TEMPEST_ENDPOINT_TYPE:
+              type: choice
+              choices:
+                - internalURL
+                - adminURL
+                - publicURL
+              description: Openstack endpoint type to use during test run
+            TEMPEST_REPO:
+              type: string
+              default: "https://github.com/openstack/tempest"
+              description: URL to Tempest repo (local or remote) or path to tempest folder in container
+            TOOLS_REPO:
+              type: string
+              default: "https://github.com/Mirantis/cvp-configuration"
+              description: URL of repo where testing tools, scenarios, configs are located.
         cvp-ha:
           type: workflow-scm
           name: cvp-ha
@@ -213,11 +276,11 @@ parameters:
               description: Credentials to the Salt API
             TEMPEST_TARGET_NODE:
               type: string
-              default: ""
+              default: "${_param:cicd_control_node03_hostname}.${_param:cluster_domain}"
               description: Node where container with tempest will be run
             TEST_IMAGE:
               type: string
-              default: "rallyforge/rally"
+              default: "xrally/xrally-openstack:0.9.1"
               description: Docker image to use for running Rally/Tempest
             TARGET_NODES:
               type: string
@@ -233,7 +296,7 @@ parameters:
               description: If you have any problems with timeouts (e.g. while waiting for node to be up/down), please increase this value
             SKIP_LIST_PATH:
               type: string
-              default: "/home/rally/cvp-configuration/tempest/skip-list.yaml"
+              default: "cvp-configuration/tempest/skip-list.yaml"
               description: path to skip-list file inside container
             PROXY:
               type: string
@@ -242,7 +305,7 @@ parameters:
             TEMPEST_TEST_PATTERN:
               type: string
               default: "set=smoke"
-              description: Use set=smoke (or identity,full...] or just test name
+              description: Use set=smoke (or identity,full...) or just test name
             MANUAL_CONFIRMATION:
               type: boolean
               default: 'false'
@@ -253,5 +316,51 @@ parameters:
               description: Can be repo url (local or remote) or path to folder (inside container) with Tempest
             TOOLS_REPO:
               type: string
-              default: "${_param:gerrit_public_host}/cvp-configuration"
+              default: "https://github.com/Mirantis/cvp-configuration"
               description: URL of repo where testing tools, scenarios, configs are located.
+        cvp-perf:
+          type: workflow-scm
+          name: cvp-perf
+          display_name: "CVP - Performance tests"
+          discard:
+            build:
+              keep_num: 20
+            artifact:
+              keep_num: 20
+          concurrent: false
+          scm:
+            type: git
+            url: "${_param:jenkins_gerrit_url}/mk/mk-pipelines"
+            credentials: "gerrit"
+            script: cvp-perf.groovy
+          param:
+            DEBUG_MODE:
+              type: boolean
+              default: 'false'
+              description: Enable if you need to keep container after the test and debug
+            RALLY_SCENARIO_FILE:
+              type: string
+              default: "cvp-configuration/rally/rally_scenarios.json"
+              description: Path to scenario file in container
+            TEST_IMAGE:
+              type: string
+              default: "xrally/xrally-openstack:0.9.1"
+              description: Docker image to use for running Rally/Tempest
+            SALT_MASTER_URL:
+              type: string
+              default: "${_param:jenkins_salt_api_url}"
+              description: Full Salt API address [e.g. https://10.10.10.2:6969]
+            SALT_MASTER_CREDENTIALS:
+              type: string
+              default: "salt"
+              description: Credentials to the Salt API
+            TARGET_NODE:
+              type: string
+              default: "${_param:cicd_control_node03_hostname}.${_param:cluster_domain}"
+              description: Node where docker container with Rally will be run
+            TOOLS_REPO:
+              type: string
+              default: "https://github.com/Mirantis/cvp-configuration"
+            PROXY:
+              type: string
+              default: ""

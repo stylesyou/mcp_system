@@ -59,13 +59,34 @@ parameters:
             score: -1..+1
         "refs/tags/*":
           actions:
+          - name: pushTag
+            group: Administrators
+            force: true
+          - name: pushTag
+            group: Project Owners
+            force: true
           - name: pushSignedTag
             group: devops-core
+          - name: pushSignedTag
+            group: Administrators
+          - name: pushSignedTag
+            group: Project Owners
           - name: create
             group: devops-core
+          - name: create
+            group: Administrators
           - name: push
             group: devops-core
+          - name: push
+            group: Administrators
+            force: true
           - name: forgeCommitter
             group: devops-core
+          - name: forgeCommitter
+            group: Administrators
           - name: forgeAuthor
             group: devops-core
+          - name: forgeAuthor
+            group: Administrators
+          - name: forgeServerAsCommitter
+            group: Administrators

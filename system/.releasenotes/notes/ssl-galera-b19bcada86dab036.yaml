@@ -1,0 +1,9 @@
+---
+summary: >
+  Added a possibility to configure the SSL ``GRANT`` options
+  when creating the Galera databases
+
+features:
+  - Added a possibility to set the SSL ``GRANT`` options when
+    creating the Galera databases using the
+    ``mysql_{service}_ssl_option`` parameter.

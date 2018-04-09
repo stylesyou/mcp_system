@@ -1,2 +1,9 @@
 classes:
 - service.barbican.server.single
+parameters:
+  _param:
+    internal_protocol: 'http'
+  barbican:
+    server:
+      identity:
+        protocol: ${_param:internal_protocol}

@@ -11,6 +11,7 @@ parameters:
     pushkin_db_host: ${_param:haproxy_postgresql_bind_host}
     pushkin_smtp_host: smtp.gmail.com
     pushkin_smtp_port: 587
+    pushkin_smtp_use_tls: true
     webhook_from: your_sender@mail.com
     pushkin_email_sender_password: your_sender_password
     webhook_recipients: "recepient1@mail.com,recepient2@mail.com"
@@ -38,6 +39,7 @@ parameters:
             EMAIL_SENDER_PASSWORD: ${_param:pushkin_email_sender_password}
             SMTP_HOST: ${_param:pushkin_smtp_host}
             SMTP_PORT: ${_param:pushkin_smtp_port}
+            SMTP_USE_TLS: ${_param:pushkin_smtp_use_tls}
             WEBHOOK_RECIPIENTS: ${_param:webhook_recipients}
             WEBHOOK_LOGIN_ID: ${_param:webhook_login_id}
             WEBHOOK_APPLICATION_ID: ${_param:webhook_application_id}
